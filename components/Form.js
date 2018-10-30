@@ -1,7 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import ApiKeys from '../constants/ApiKeys.js';
+import * as firebase from 'firebase';
 
 export default class Form extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      isLoadingComplete: false,
+    };
+    //initialize firebase/ check connection
+    if(!firebase.apps.length){
+      firebase.initializeApp(ApiKeys.FirebaseConfig);
+    }
+  }
+  //React Native / Expo: Firebase Authentication Starter Tutorial
   render(){
     return(
       <View style={styles.formContainer}>
