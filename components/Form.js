@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import ApiKeys from '../constants/ApiKeys.js';
 import * as firebase from 'firebase';
 
@@ -9,21 +9,39 @@ export default class Form extends React.Component {
     super(props);
     this.state = {
       isLoadingComplete: false,
+      email: "",
+      password: "",
+      passwordConfirm: "",
     };
-    //initialize firebase/ check connection
-    if(!firebase.apps.length){
-      firebase.initializeApp(ApiKeys.FirebaseConfig);
-    }
   }
-  //React Native / Expo: Firebase Authentication Starter Tutorial
+
+  onSignupPress = () => {
+    if(this.state.password !== this.state.passwordConfirm){
+      Alert.alert("Passwords do not match");
+      return;
+    } 
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => { }, (error) => {
+      Alert.alert(error.message);
+    });
+  }
+
   render(){
     return(
       <View style={styles.formContainer}>
-        <TextInput placeholder='Username' style={styles.textInput} underlineColorAndroid={'transparent'}/>
-        <TextInput placeholder='Password' secureTextEntry={true} style={styles.textInput} underlineColorAndroid={'transparent'}/>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
-        </TouchableOpacity>
+        <TextInput placeholder='email' style={styles.textInput} underlineColorAndroid={'transparent'}
+          value= {this.state.email}
+          onChangeText= {(text) => { this.setState({email: text}) }}
+        />
+        <TextInput placeholder='password' secureTextEntry={true} style={styles.textInput} underlineColorAndroid={'transparent'}
+          value= {this.state.password}
+          onChangeText= {(text) => { this.setState({password: text}) }}
+        />
+        <TextInput placeholder='password' secureTextEntry={true} style={styles.textInput} underlineColorAndroid={'transparent'}
+          value= {this.state.passwordConfirm}
+          onChangeText= {(text) => { this.setState({passwordConfirm: text}) }}
+        />
+        <Button title= "Sign Up" onPress={this.onSignupPress} />
       </View>
     )
   }
