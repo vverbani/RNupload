@@ -1,8 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView } from 'react-native';
-//import { AppLoading, Asset, Font, Icon } from 'expo';
-//import AppNavigator from './navigation/AppNavigator';
-import Form from './components/Form';
+import Login from './components/Login';
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
 
@@ -18,8 +16,8 @@ export default class App extends React.Component {
       if(!firebase.apps.length){
         firebase.initializeApp(ApiKeys.FirebaseConfig);
       }
+      firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
     }
-
     onAuthStateChanged = (user) => {
       this.setState({isAuthenticationReady: true});
       this.setState({isAuthenticated: !!user});
@@ -28,7 +26,7 @@ export default class App extends React.Component {
     return(
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.header}>Sign up</Text>
-        <Form/>
+        <Login />
       </KeyboardAvoidingView>
     )
   }
