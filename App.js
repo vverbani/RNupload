@@ -1,6 +1,8 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView } from 'react-native';
-import ResetPassword from './components/ResetPassword';
+import ResetPassword from './components/auth/ResetPassword';
+import RootNavigator from './navigation/RootNavigator';
+
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
 
@@ -25,8 +27,8 @@ export default class App extends React.Component {
   render(){
     return(
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
-        <Text style={styles.header}>Sign up</Text>
-        <ResetPassword />
+        {/*<Text style={styles.header}>Sign up</Text>*/}
+        <RootNavigator/>
       </KeyboardAvoidingView>
     )
   }
