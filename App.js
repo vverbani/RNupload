@@ -1,7 +1,8 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView } from 'react-native';
-import ResetPassword from './components/auth/ResetPassword';
-import RootNavigator from './navigation/RootNavigator';
+import { createStackNavigator } from 'react-navigation';
+
+import LoginScreen from './screens/LoginScreen';
 
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
@@ -26,13 +27,17 @@ export default class App extends React.Component {
     }
   render(){
     return(
-      <KeyboardAvoidingView behavior='padding' style={styles.container}>
+      <View>
         {/*<Text style={styles.header}>Sign up</Text>*/}
-        <RootNavigator/>
-      </KeyboardAvoidingView>
-    )
+        <AppStackNavigator />
+        </View>
+      
+    );
   }
 }
+const AppStackNavigator = createStackNavigator({
+    Login: { screen: LoginScreen}
+  });
 
 const styles = StyleSheet.create({
   container: {
