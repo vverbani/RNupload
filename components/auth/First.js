@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import * as firebase from 'firebase';
 
-export default class LoginScreen extends React.Component {
+export default class Login extends React.Component {
 
   render(){
     return(
       <View style={styles.formContainer}>
-        <Text style= {styles.textInput}>LoginScreen</Text>
+        
+        <Text> This is the first screen></Text>
       </View>
     )
   }

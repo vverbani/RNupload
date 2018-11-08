@@ -1,8 +1,6 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Text, Image, TextInput, KeyboardAvoidingView } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
-
-import LoginScreen from './screens/LoginScreen';
+import { Platform, StatusBar, StyleSheet,View, Button, Text, TextInput, KeyboardAvoidingView } from 'react-native';
+import RootNavigator from './navigation/RootNavigator';
 
 import ApiKeys from './constants/ApiKeys';
 import * as firebase from 'firebase';
@@ -25,19 +23,18 @@ export default class App extends React.Component {
       this.setState({isAuthenticationReady: true});
       this.setState({isAuthenticated: !!user});
     }
+    handlePress(){
+      this.props.navigation.navigate('ResetPassword');
+    }
   render(){
     return(
-      <View>
-        {/*<Text style={styles.header}>Sign up</Text>*/}
-        <AppStackNavigator />
-        </View>
-      
-    );
+        <View style={styles.formContainer}>
+        <RootNavigator />
+      </View>
+    )
   }
 }
-const AppStackNavigator = createStackNavigator({
-    Login: { screen: LoginScreen}
-  });
+
 
 const styles = StyleSheet.create({
   container: {
@@ -50,5 +47,6 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color:'#294294',
     fontWeight: 'bold',
+    marginTop: 30,
   }
 });
