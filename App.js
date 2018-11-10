@@ -1,52 +1,34 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet,View, Button, Text, TextInput, KeyboardAvoidingView } from 'react-native';
-import RootNavigator from './navigation/RootNavigator';
+import { StyleSheet, Text, View } from 'react-native';
+import { createStackNavigator } from 'react-navigation'; 
 
-import ApiKeys from './constants/ApiKeys';
-import * as firebase from 'firebase';
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
+import DashBoardScreen from './screens/DashBoardScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 export default class App extends React.Component {
-  //authentication for login / register
-  constructor(props){
-    super(props);
-      this.state = {
-        isAuthenticationReady: false,
-        isAuthenticated: true,
-      };
-      //initialize firebase/ check connection
-      if(!firebase.apps.length){
-        firebase.initializeApp(ApiKeys.FirebaseConfig);
-      }
-      firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
-    }
-    onAuthStateChanged = (user) => {
-      this.setState({isAuthenticationReady: true});
-      this.setState({isAuthenticated: !!user});
-    }
-    handlePress(){
-      this.props.navigation.navigate('ResetPassword');
-    }
-  render(){
-    return(
-        <View style={styles.formContainer}>
-        <RootNavigator />
-      </View>
-    )
+  render() {
+    return (
+      <AppNavigator />
+    );
   }
 }
 
+const AppNavigator =  createStackNavigator ({
+  HomeScreen: { screen: HomeScreen },
+  LoginScreen: { screen: LoginScreen },
+  RegisterScreen: { screen: RegisterScreen },
+  DashBoardScreen: { screen: DashBoardScreen },
+  ResetPasswordScreen: { screen: ResetPasswordScreen }
+})
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  header: {
-    fontSize: 28,
-    color:'#294294',
-    fontWeight: 'bold',
-    marginTop: 30,
-  }
 });

@@ -2,15 +2,33 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import * as firebase from 'firebase';
 
-export default class Login extends React.Component {
+export default class ResetPasswordScreen extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      email: "",
+    };
+  }
 
+  onResetPasswordPress = () => {
+    firebase.auth().sendPasswordResetEmail(this.state.email)
+      .then( () => {
+          this.props.navigation.navigate('HomeScreen');
+          console.log('Im on the reset password Screen');
+      }, (error) => {
+        Alert.alert(error.message);
+      }); 
+  }
   render(){
-    return(
+    return (
       <View style={styles.formContainer}>
-        
-        <Text> This is the first screen></Text>
+        <TextInput placeholder='email' style={styles.textInput} underlineColorAndroid={'transparent'}
+          value= {this.state.email}
+          onChangeText= {(text) => { this.setState({email: text}) }}
+        />
+        <Button title= "Reset Password" onPress={this.onResetPasswordPress} />
       </View>
-    )
+    );
   }
 }
 

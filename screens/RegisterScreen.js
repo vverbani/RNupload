@@ -2,27 +2,31 @@ import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import * as firebase from 'firebase';
 
-export default class Login extends React.Component {
+export default class RegisterScreen extends React.Component {
 
   constructor(props){
     super(props);
     this.state = {
+      isLoadingComplete: false,
       email: "",
       password: "",
+      passwordConfirm: "",
     };
   }
 
-  onLoginPress = () => {
-    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+  onSignupPress = () => {
+    if(this.state.password !== this.state.passwordConfirm){
+      Alert.alert("Passwords do not match");
+      return;
+    } 
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then(() => { 
-      //nothing to display as user log in is successful
-      Alert.alert("successful");
-
-    }, (error) => {
-      //this will have to change to proper error message
+      this.props.navigation.navigate('DashBoardScreen'); 
+      }, (error) => {
       Alert.alert(error.message);
-    })
+    });
   }
+
   render(){
     return(
       <View style={styles.formContainer}>
@@ -34,7 +38,12 @@ export default class Login extends React.Component {
           value= {this.state.password}
           onChangeText= {(text) => { this.setState({password: text}) }}
         />
-        <Button title= "Log in" onPress={this.onLoginPress} />
+        <TextInput placeholder='password' secureTextEntry={true} style={styles.textInput} underlineColorAndroid={'transparent'}
+          value= {this.state.passwordConfirm}
+          onChangeText= {(text) => { this.setState({passwordConfirm: text}) }}
+        />
+        <Button title= "Sign Up" onPress={this.onSignupPress} />
+        <Text>Already have an account?</Text><Button title= "Login" onPress={this.goToLogin} />
       </View>
     )
   }

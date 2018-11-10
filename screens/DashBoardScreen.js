@@ -1,16 +1,24 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
-import SignOut from './SignOut';
-import * as firebase from 'firebase';
+import SignOut from  './SignOut';
 
-export default class Dashboard extends React.Component {
-
+export default class DashboardScreen extends React.Component {
+  constructor(props) {
+      super(props);
+      this.handleClick = this.handleClick.bind(this);
+  }
+  onSignoutPress = () => {
+    this.props.navigation.navigate('HomeScreen');
+    firebase.auth().signOut();  
+  } 
   render(){
     return(
-      <View style={styles.formContainer}>
-       <Text style={styles.TextInput}>You are on the Dashboard Sir!</Text>
+     <View>
+     <Text>You are on the Dashboard Screen</Text>
+        <Button onPress= { this.onSignoutPress} title= "Signout"
+        />
       </View>
-    )
+    );
   }
 }
 
