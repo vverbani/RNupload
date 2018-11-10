@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Image, Text, TouchableOpacity, Button, KeyboardAvoidingView } from 'react-native';
+import {LinearGradient} from 'expo';
+
+var s = require('../components/style/style');
 
 export default class HomeScreen extends Component {
 	//login or register
@@ -18,13 +21,30 @@ export default class HomeScreen extends Component {
 	}
 	render(){
 		return (
-			<View>
-				<Text>You are on the homescreen </Text>
-				<Button onPress= { this.goToRegister} title= "Register"
-				/>
-				<Button onPress= { this.goToLogin} title= "Login"
-				/>
+
+			<KeyboardAvoidingView behavior='padding' style={s.container}>
+
+      		<Image source={require('../assets/images/logo.png')} style={s.logo}/>
+
+      		<View style={s.contentBackground}>
+
+				<View style={s.formContainer}>
+
+				<TouchableOpacity onPress={this.goToRegister}>
+          			<LinearGradient style={s.button} colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]}>
+            			<Text style={s.buttonText}>Register</Text>
+          			</LinearGradient>
+        		</TouchableOpacity>
+
+        		<TouchableOpacity onPress={this.goToLogin}>
+          			<View style={s.button2}>
+            			<Text style={s.buttonText2}>Login</Text>
+          			</View>
+        		</TouchableOpacity>
+				</View>
 			</View>
+
+      		</KeyboardAvoidingView>
 		);
 	}
 }
