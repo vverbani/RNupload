@@ -102,7 +102,7 @@ export default class LoginScreen extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity style={s.button} onPress={this.loginWithFacebook}>
-            <Text style={s.buttonTextFB}>Sign Ip With Facebook</Text>
+            <Text style={s.buttonTextFB}>Sign In With Facebook</Text>
           </TouchableOpacity>
 
           <View style={{flexDirection:"row"}}>
