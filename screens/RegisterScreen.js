@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Image, Alert, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
 import {LinearGradient} from 'expo';
 
@@ -83,7 +83,7 @@ export default class RegisterScreen extends React.Component {
 
         <View style={{flexDirection:"row"}}>
           <Text style={s.textNormal}>Already have an account?</Text>
-          <TouchableOpacity onPress={this.goToLogin}><Text style={s.textDark}> Sign Up</Text></TouchableOpacity>
+          <TouchableOpacity onPress={this.goToLogin}><Text style={s.textDark}> Log in</Text></TouchableOpacity>
         </View>
 
       </View>

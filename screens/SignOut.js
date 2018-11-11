@@ -5,13 +5,12 @@ import * as firebase from 'firebase';
 export default class SignOut extends React.Component {
 
   onSignoutPress = () => {
-    this
     firebase.auth().signOut();  
   } 
 
   render(){
     return(
-      <View style={styles.formContainer}>
+      <View>
        <Button title="Signout" onPress={this.onSignoutPress} />
       </View>
     );

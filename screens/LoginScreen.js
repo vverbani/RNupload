@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, Image, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { View, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
-import {LinearGradient} from 'expo';
+
+import { expo, LinearGradient} from 'expo';
+
+import SignOut from './SignOut';
 
 var s = require('../components/style/style');
 
@@ -24,11 +27,45 @@ export default class LoginScreen extends Component {
       //this will have to change to proper error message
       Alert.alert(error.message);
     })
+
+
   }
+  //retain user login data through facebook
+  componentDidMount(){
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user != null){
+        console.log(user);
+      }
+    })
+  }
+  
+  async loginWithFacebook(){
+  try {
+    const {
+      type,
+      token,
+      expires,
+      permissions,
+      declinedPermissions,
+    } = await Expo.Facebook.logInWithReadPermissionsAsync('1971483569598050', {
+      permissions: ['public_profile'],
+    });
+    console.log(type);
+    if (type === 'success') {
+      // Get the user's name using Facebook's Graph API
+      const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+      Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+    } else {
+      // type === 'cancel'
+    }
+  } catch ({ message }) {
+    alert(`Facebook Login Error: ${message}`);
+  }
+}
   goToRegister = () => {
     this.props.navigation.navigate('RegisterScreen');
   }
-  
+
   render(){
 		return (
 
@@ -64,10 +101,17 @@ export default class LoginScreen extends Component {
             </LinearGradient>
           </TouchableOpacity>
 
+          <Button
+            title="Facebook Login"
+            onPress={this.loginWithFacebook}
+          />
+
           <View style={{flexDirection:"row"}}>
             <Text style={s.textNormal}>Don't have an account?</Text>
             <TouchableOpacity onPress={this.goToRegister}><Text style={s.textDark}> Register</Text></TouchableOpacity>
           </View>
+
+
 		    
         </View>
     </View>
