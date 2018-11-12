@@ -97,7 +97,7 @@ export default class LoginScreen extends Component {
 
           <TouchableOpacity onPress={this.onLoginPress}>
             <LinearGradient style={s.button} colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]}>
-              <Text style={s.buttonText}>Log In</Text>
+              <Text style={s.buttonText}>Sign In</Text>
             </LinearGradient>
           </TouchableOpacity>
 
