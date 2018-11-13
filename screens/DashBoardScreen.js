@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
-import SignOut from  './SignOut';
+import * as firebase from 'firebase';
 
 export default class DashboardScreen extends React.Component {
   constructor(props) {
       super(props);
-      this.handleClick = this.handleClick.bind(this);
   }
   onSignoutPress = () => {
     this.props.navigation.navigate('HomeScreen');

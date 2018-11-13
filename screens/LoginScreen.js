@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { View, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import {View, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
 
-import { expo, LinearGradient} from 'expo';
-
-import SignOut from './SignOut';
+import { LinearGradient} from 'expo';
 
 var s = require('../components/style/style');
 
@@ -28,7 +26,6 @@ export default class LoginScreen extends Component {
       Alert.alert(error.message);
     })
 
-
   }
   //retain user login data through facebook
   componentDidMount(){
@@ -48,13 +45,20 @@ export default class LoginScreen extends Component {
       permissions,
       declinedPermissions,
     } = await Expo.Facebook.logInWithReadPermissionsAsync('1971483569598050', {
-      permissions: ['public_profile'],
+      permissions: ['public_profile', 'email'],
     });
     console.log(type);
     if (type === 'success') {
       // Get the user's name using Facebook's Graph API
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
       Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+      
+      console.log();
+      try{
+        await firebase.auth().signInWithCredential(token);
+      }catch(error){
+        console.log(error);
+      }
     } else {
       // type === 'cancel'
     }
@@ -65,6 +69,8 @@ export default class LoginScreen extends Component {
   goToRegister = () => {
     this.props.navigation.navigate('RegisterScreen');
   }
+
+  
 
   render(){
 		return (
@@ -82,7 +88,7 @@ export default class LoginScreen extends Component {
           <View>
             <Image source={require('../assets/images/iconEmail.jpg')} resizeMode='contain' style={s.icon}/>
 		        <TextInput placeholder='email' placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-		          value= {this.state.email}
+              value= {this.state.email}
 		          onChangeText= {(text) => { this.setState({email: text}) }}
 		        />
           </View>
@@ -90,7 +96,7 @@ export default class LoginScreen extends Component {
           <View>
             <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
 		        <TextInput placeholder='password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-		          value= {this.state.password}
+              value= {this.state.password}
 		          onChangeText= {(text) => { this.setState({password: text}) }}
 		        />
           </View>

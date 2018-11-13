@@ -11,6 +11,7 @@
     "icon": "./assets/icon.png",
     "facebookScheme": "fb1971483569598050",
     "facebookDisplayName" : "newupload",
+    "facebookAppId": "1971483569598050",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

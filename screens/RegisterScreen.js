@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, Alert, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { TouchableWithoutFeedback,Keyboard,View, Image, Alert, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
 import {LinearGradient} from 'expo';
 
@@ -34,6 +34,8 @@ export default class RegisterScreen extends React.Component {
     this.props.navigation.navigate('LoginScreen');
   }
 
+
+
   render(){
     return(
 
@@ -50,6 +52,7 @@ export default class RegisterScreen extends React.Component {
         <View>
           <Image source={require('../assets/images/iconEmail.jpg')} resizeMode='contain' style={s.icon}/>
           <TextInput placeholder='Email' placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+          
           value= {this.state.email}
           onChangeText= {(text) => { this.setState({email: text}) }}
           />
@@ -58,6 +61,7 @@ export default class RegisterScreen extends React.Component {
         <View>
           <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
           <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+          
           value= {this.state.password}
           onChangeText= {(text) => { this.setState({password: text}) }}
           />
@@ -66,6 +70,7 @@ export default class RegisterScreen extends React.Component {
         <View>
           <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
           <TextInput placeholder='Confirm Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+          onSubmitEditing={Keyboard.dismiss}
           value= {this.state.passwordConfirm}
           onChangeText= {(text) => { this.setState({passwordConfirm: text}) }}
           />
@@ -87,6 +92,7 @@ export default class RegisterScreen extends React.Component {
         </View>
 
       </View>
+    
     </View>
 
     </KeyboardAvoidingView>

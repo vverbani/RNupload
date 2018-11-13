@@ -37,9 +37,24 @@ export default class App extends React.Component {
 }
 
 const AppNavigator =  createStackNavigator ({
-  HomeScreen: { screen: HomeScreen, navigationOptions: { header: null } },
-  LoginScreen: { screen: LoginScreen, navigationOptions: { header: null } },
-  RegisterScreen: { screen: RegisterScreen, navigationOptions: { header: null } },
+  HomeScreen: { 
+    screen: HomeScreen, 
+      navigationOptions: { 
+        header: null 
+      } 
+    },
+  LoginScreen: { 
+    screen: LoginScreen, 
+      navigationOptions: { 
+        header: null 
+      } 
+    },
+  RegisterScreen: { 
+    screen: RegisterScreen, 
+    navigationOptions: { 
+      header: null 
+    }
+  },
   DashBoardScreen: { screen: DashBoardScreen },
   ResetPasswordScreen: { screen: ResetPasswordScreen },
 })
