@@ -7,8 +7,11 @@ export default class DashboardScreen extends React.Component {
       super(props);
   }
   onSignoutPress = () => {
-    this.props.navigation.navigate('HomeScreen');
-    firebase.auth().signOut();  
+    firebase.auth().signOut().then(function() {
+      this.props.navigation.navigate('HomeScreen');
+      }).catch(function(error) {
+          // An error happened.
+      });  
   } 
   render(){
     return(

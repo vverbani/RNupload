@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {View, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
-
 import { LinearGradient} from 'expo';
 
 var s = require('../components/style/style');
@@ -18,7 +17,6 @@ export default class LoginScreen extends Component {
     	firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     	.then(() => { 
       //nothing to display as user log in is successful
-      this.props.navigation.navigate('DashBoardScreen');
       console.log('I\'ve been transfered to the Dashboard');
 
     }, (error) => {
@@ -45,20 +43,18 @@ export default class LoginScreen extends Component {
       permissions,
       declinedPermissions,
     } = await Expo.Facebook.logInWithReadPermissionsAsync('1971483569598050', {
-      permissions: ['public_profile', 'email'],
+      permissions: ['public_profile'],
     });
-    console.log(type);
     if (type === 'success') {
       // Get the user's name using Facebook's Graph API
       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
       Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
       
-      console.log();
-      try{
-        await firebase.auth().signInWithCredential(token);
-      }catch(error){
+      const credential = firebase.auth.FacebookAuthProvider.credential(token);
+      firebase.auth.Auth.prototype.signInAndRetrieveDataWithCredential(credential).catch((error) => {
         console.log(error);
-      }
+      })
+      
     } else {
       // type === 'cancel'
     }
