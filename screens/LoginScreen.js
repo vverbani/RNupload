@@ -34,39 +34,9 @@ export default class LoginScreen extends Component {
     })
   }
   
-  async loginWithFacebook(){
-  try {
-    const {
-      type,
-      token,
-      expires,
-      permissions,
-      declinedPermissions,
-    } = await Expo.Facebook.logInWithReadPermissionsAsync('1971483569598050', {
-      permissions: ['public_profile'],
-    });
-    if (type === 'success') {
-      // Get the user's name using Facebook's Graph API
-      const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-      Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-      
-      const credential = firebase.auth.FacebookAuthProvider.credential(token);
-      firebase.auth.Auth.prototype.signInAndRetrieveDataWithCredential(credential).catch((error) => {
-        console.log(error);
-      })
-      
-    } else {
-      // type === 'cancel'
-    }
-  } catch ({ message }) {
-    alert(`Facebook Login Error: ${message}`);
-  }
-}
   goToRegister = () => {
     this.props.navigation.navigate('RegisterScreen');
   }
-
-  
 
   render(){
 		return (
@@ -103,17 +73,18 @@ export default class LoginScreen extends Component {
             </LinearGradient>
           </TouchableOpacity>
 
-          <TouchableOpacity style={s.button} onPress={this.loginWithFacebook}>
+          <TouchableOpacity style={s.button}>
             <Text style={s.buttonTextFB}>Sign In With Facebook</Text>
           </TouchableOpacity>
 
           <View style={{flexDirection:"row"}}>
             <Text style={s.textNormal}>Don't have an account?</Text>
-            <TouchableOpacity onPress={this.goToRegister}><Text style={s.textDark}> Register</Text></TouchableOpacity>
+            <TouchableOpacity onPress={this.goToRegister}>
+              <Text style={s.textDark}>
+                Register
+              </Text>
+            </TouchableOpacity>
           </View>
-
-
-		    
         </View>
     </View>
 
