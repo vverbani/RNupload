@@ -53,8 +53,8 @@ module.exports = StyleSheet.create({
     marginTop:25,
     alignSelf: 'stretch',
     padding: 13,
-    backgroundColor: '#3d7ab2',
-    borderWidth: 2,
+    backgroundColor: '#fa6457',
+    borderWidth: 1,
     borderColor: '#39a498',
     alignItems: 'center',
     borderRadius:40,
@@ -65,7 +65,7 @@ module.exports = StyleSheet.create({
     alignSelf: 'stretch',
     padding: 13,
     backgroundColor: '#FFF',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#39a498',
     alignItems: 'center',
     borderRadius:40,
@@ -79,9 +79,9 @@ module.exports = StyleSheet.create({
     color:'#39a498',
     fontSize:24,
   },
-  buttonTextFB:{
+  buttonTextGoogle:{
     color:'#FFF',
-    fontSize:20,
+    fontSize:22,
   },
   icon:{
     position:'absolute',

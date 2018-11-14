@@ -74,15 +74,13 @@ export default class LoginScreen extends Component {
           </TouchableOpacity>
 
           <TouchableOpacity style={s.button}>
-            <Text style={s.buttonTextFB}>Sign In With Facebook</Text>
+            <Text style={s.buttonTextGoogle}>Sign In With Google</Text>
           </TouchableOpacity>
 
           <View style={{flexDirection:"row"}}>
             <Text style={s.textNormal}>Don't have an account?</Text>
             <TouchableOpacity onPress={this.goToRegister}>
-              <Text style={s.textDark}>
-                Register
-              </Text>
+              <Text style={s.textDark}> Register</Text>
             </TouchableOpacity>
           </View>
         </View>

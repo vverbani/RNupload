@@ -82,10 +82,6 @@ export default class RegisterScreen extends React.Component {
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity style={s.button}>
-            <Text style={s.buttonTextFB}>Sign Up With Facebook</Text>
-        </TouchableOpacity>
-
         <View style={{flexDirection:"row"}}>
           <Text style={s.textNormal}>Already have an account?</Text>
           <TouchableOpacity onPress={this.goToLogin}><Text style={s.textDark}> Log in</Text></TouchableOpacity>
