@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {View, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
 import { LinearGradient} from 'expo';
+import * as Expo from 'expo';
 
 var s = require('../components/style/style');
 
@@ -13,6 +14,41 @@ export default class LoginScreen extends Component {
 	      password: "",
 	    };
 	  }
+
+    onGoogleLoginPress = async () => {
+      try {
+        const result = await Expo.Google.logInAsync({
+          androidClientId: "439794516481-fndrknicmhgr6pqthaq70eidpnrkh8h6.apps.googleusercontent.com",
+          scopes: ['profile', 'email']
+        })
+
+        if (result.type === 'success') {
+          console.log(result)
+          firebase.auth().getRedirectResult().then(function(result) {
+          if (result.credential) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            var token = result.credential.accessToken;
+          }
+          var user = result.user;
+        }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      console.log(errorCode);
+      // ...
+    });
+        } else {
+          console.log("cancelled")
+        }
+      } catch(e) {
+        console.log("error",e)
+      }
+    }
+
   	onLoginPress = () => {
     	firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     	.then(() => { 
@@ -41,12 +77,12 @@ export default class LoginScreen extends Component {
   render(){
 		return (
 
-      <KeyboardAvoidingView behavior='padding' style={s.container}>
+    <KeyboardAvoidingView behavior='padding' style={s.container}>
 
       <LinearGradient colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]} style={s.topGradient}>
         <Image source={require('../assets/images/logo.png')} style={s.logo}/>
       </LinearGradient>
-
+    
       <View style={s.contentBackground}>
 
 			    <View style={s.formContainer}>
@@ -73,7 +109,7 @@ export default class LoginScreen extends Component {
             </LinearGradient>
           </TouchableOpacity>
 
-          <TouchableOpacity style={s.button}>
+          <TouchableOpacity style={s.button} onPress={this.onGoogleLoginPress}>
             <Text style={s.buttonTextGoogle}>Sign In With Google</Text>
           </TouchableOpacity>
 
@@ -84,9 +120,8 @@ export default class LoginScreen extends Component {
             </TouchableOpacity>
           </View>
         </View>
-    </View>
-
-    </KeyboardAvoidingView>
+      </View>
+  </KeyboardAvoidingView>
 		);
 	}
 }
