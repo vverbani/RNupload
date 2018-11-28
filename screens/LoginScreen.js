@@ -15,59 +15,39 @@ export default class LoginScreen extends Component {
 	    };
 	  }
 
-    onGoogleLoginPress = async () => {
-      try {
-        const result = await Expo.Google.logInAsync({
-          androidClientId: "439794516481-fndrknicmhgr6pqthaq70eidpnrkh8h6.apps.googleusercontent.com",
-          scopes: ['profile', 'email']
-        })
-
-        if (result.type === 'success') {
-          console.log(result)
-          firebase.auth().getRedirectResult().then(function(result) {
-          if (result.credential) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
-          }
-          var user = result.user;
-        }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      console.log(errorCode);
-      // ...
-    });
-        } else {
-          console.log("cancelled")
-        }
-      } catch(e) {
-        console.log("error",e)
-      }
-    }
-
+    //registering with email
   	onLoginPress = () => {
     	firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     	.then(() => { 
-      //nothing to display as user log in is successful
-      console.log('I\'ve been transfered to the Dashboard');
-
+      //login successful
+      this.props.navigation.navigate('DashBoardScreen');
     }, (error) => {
-      //this will have to change to proper error message
-      Alert.alert(error.message);
+      //unsucessful
     })
-
   }
-  //retain user login data through facebook
-  componentDidMount(){
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user != null){
-        console.log(user);
+
+  //register with facebook
+  async onFacebookLoginPress() {
+    try {
+      const {
+        type,
+        token
+      } = await Expo.Facebook.logInWithReadPermissionsAsync('1971483569598050', {
+        permissions: ['public_profile'],
+      });
+      if (type === 'success') {
+        //retrieve fb information
+        const credential = firebase.auth.FacebookAuthProvider.credential(token)
+        //create+store database
+        firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
+          Alert.alert(error);
+        })
+      } else {
       }
-    })
+    } catch ({ message }) {
+      //error only for developer mode
+      alert(`Facebook Login Error: ${message}`);
+    }
   }
   
   goToRegister = () => {
@@ -109,8 +89,8 @@ export default class LoginScreen extends Component {
             </LinearGradient>
           </TouchableOpacity>
 
-          <TouchableOpacity style={s.button} onPress={this.onGoogleLoginPress}>
-            <Text style={s.buttonTextGoogle}>Sign In With Google</Text>
+          <TouchableOpacity style={s.button} onPress={this.onFacebookLoginPress}>
+            <Text style={s.buttonTextGoogle}>Sign In With Facebook</Text>
           </TouchableOpacity>
 
           <View style={{flexDirection:"row"}}>

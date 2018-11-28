@@ -1,25 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import * as firebase from 'firebase';
+import { LinearGradient} from 'expo';
+
+var s = require('../components/style/style');
 
 export default class DashboardScreen extends React.Component {
   constructor(props) {
       super(props);
   }
-  onSignoutPress = () => {
-    firebase.auth().signOut().then(function() {
-      this.props.navigation.navigate('HomeScreen');
-      }).catch(function(error) {
-          // An error happened.
-      });  
-  } 
+
   render(){
     return(
-     <View>
-     <Text>You are on the Dashboard Screen</Text>
-        <Button onPress= { this.onSignoutPress} title= "Signout"
-        />
+      <View>
+          <Text>Dashboard</Text>
       </View>
+        
     );
   }
 }

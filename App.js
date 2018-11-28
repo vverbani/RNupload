@@ -55,7 +55,9 @@ const AppNavigator =  createStackNavigator ({
       header: null 
     }
   },
-  DashBoardScreen: { screen: DashBoardScreen },
+  DashBoardScreen: { 
+    screen: DashBoardScreen
+  },
   ResetPasswordScreen: { screen: ResetPasswordScreen },
 })
 
