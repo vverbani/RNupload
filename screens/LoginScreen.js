@@ -39,8 +39,9 @@ export default class LoginScreen extends Component {
         //retrieve fb information
         const credential = firebase.auth.FacebookAuthProvider.credential(token)
         //create+store database
+        //add navigation
         firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
-          Alert.alert(error);
+        Alert.alert(error);
         })
       } else {
       }
