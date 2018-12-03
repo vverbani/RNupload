@@ -3,6 +3,8 @@ import { TouchableWithoutFeedback,Keyboard,View, Image, Alert, Text, TextInput, 
 import * as firebase from 'firebase';
 import {LinearGradient} from 'expo';
 
+import FacebookLogin from '../components/FacebookLogin';
+
 var s = require('../components/style/style');
 
 export default class RegisterScreen extends React.Component {
@@ -18,6 +20,10 @@ export default class RegisterScreen extends React.Component {
   }
 
   onSignupPress = () => {
+    if(this.state.password.length < 9){
+      Alert.alert("Password needs to be atleast 8 characters long"); 
+      return;
+    }
     if(this.state.password !== this.state.passwordConfirm){
       Alert.alert("Passwords do not match");
       return;
@@ -51,7 +57,6 @@ export default class RegisterScreen extends React.Component {
           <View>
             <Image source={require('../assets/images/iconEmail.jpg')} resizeMode='contain' style={s.icon}/>
             <TextInput placeholder='Email' placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-            
             value= {this.state.email}
             onChangeText= {(text) => { this.setState({email: text}) }}
             />
@@ -60,7 +65,6 @@ export default class RegisterScreen extends React.Component {
           <View>
             <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
             <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-            
             value= {this.state.password}
             onChangeText= {(text) => { this.setState({password: text}) }}
             />
@@ -80,6 +84,8 @@ export default class RegisterScreen extends React.Component {
               <Text style={s.buttonText}>Sign Up</Text>
             </LinearGradient>
           </TouchableOpacity>
+
+          <FacebookLogin />
 
           <View style={{flexDirection:"row"}}>
             <Text style={s.textNormal}>Already have an account?</Text>

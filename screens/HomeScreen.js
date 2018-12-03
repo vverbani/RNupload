@@ -13,11 +13,9 @@ export default class HomeScreen extends Component {
 	}
 	goToLogin() {
 		this.props.navigation.navigate('LoginScreen');
-		console.log('I\'m going to the login screen ');
 	}
 	goToRegister() {
 		this.props.navigation.navigate('RegisterScreen');
-		console.log('I\'m going to the Register screen ');
 	}
 	render(){
 		return (

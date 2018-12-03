@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { LinearGradient} from 'expo';
 import * as Expo from 'expo';
 
+import FacebookLogin from '../components/FacebookLogin';
 var s = require('../components/style/style');
 
 export default class LoginScreen extends Component {
@@ -14,45 +15,20 @@ export default class LoginScreen extends Component {
 	      password: "",
 	    };
 	  }
-
     //registering with email
   	onLoginPress = () => {
     	firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     	.then(() => { 
+        //*************Replace this with new dashboard navigation
       this.props.navigation.navigate('DashBoardScreen');
     }, (error) => {
       Alert.alert(error);
     })
   }
 
-  //register with facebook
-  async onFacebookLoginPress() {
-    try {
-      const {
-        type,
-        token
-      } = await Expo.Facebook.logInWithReadPermissionsAsync('1971483569598050', {
-        permissions: ['public_profile'],
-      });
-      if (type === 'success') {
-        //retrieve fb information
-        const credential = firebase.auth.FacebookAuthProvider.credential(token);
-        //create+store database
-        //add navigation
-        firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
-        Alert.alert(error);
-        })
-      } else {
-      }
-    } catch ({ message }) {
-      //error only for developer mode
-      alert(`Facebook Login Error: ${message}`);
-    }
-  }
   goToRegister = () => {
     this.props.navigation.navigate('RegisterScreen');
   }
-
   render(){
 		return (
       <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
@@ -88,9 +64,7 @@ export default class LoginScreen extends Component {
                 </LinearGradient>
               </TouchableOpacity>
 
-              <TouchableOpacity style={s.button} onPress={this.onFacebookLoginPress}>
-                <Text style={s.buttonTextGoogle}>Sign In With Facebook</Text>
-              </TouchableOpacity>
+              <FacebookLogin />
 
               <View style={{flexDirection:"row"}}>
                 <Text style={s.textNormal}>Don't have an account?</Text>
