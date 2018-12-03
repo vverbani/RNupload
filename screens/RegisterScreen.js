@@ -34,64 +34,64 @@ export default class RegisterScreen extends React.Component {
     this.props.navigation.navigate('LoginScreen');
   }
 
-
-
   render(){
     return(
 
-    <KeyboardAvoidingView behavior='padding' style={s.container}>
+    <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
+      <KeyboardAvoidingView behavior='padding' style={s.container}>
 
-    <LinearGradient colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]} style={s.topGradient}>
-      <Image source={require('../assets/images/logo.png')} style={s.logo}/>
-    </LinearGradient>
+      <LinearGradient colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]} style={s.topGradient}>
+        <Image source={require('../assets/images/logo.png')} style={s.logo}/>
+      </LinearGradient>
 
-    <View style={s.contentBackground}>
+      <View style={s.contentBackground}>
 
-        <View style={s.formContainer}>
+          <View style={s.formContainer}>
 
-        <View>
-          <Image source={require('../assets/images/iconEmail.jpg')} resizeMode='contain' style={s.icon}/>
-          <TextInput placeholder='Email' placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-          
-          value= {this.state.email}
-          onChangeText= {(text) => { this.setState({email: text}) }}
-          />
+          <View>
+            <Image source={require('../assets/images/iconEmail.jpg')} resizeMode='contain' style={s.icon}/>
+            <TextInput placeholder='Email' placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+            
+            value= {this.state.email}
+            onChangeText= {(text) => { this.setState({email: text}) }}
+            />
+          </View>
+
+          <View>
+            <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
+            <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+            
+            value= {this.state.password}
+            onChangeText= {(text) => { this.setState({password: text}) }}
+            />
+          </View>
+
+          <View>
+            <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
+            <TextInput placeholder='Confirm Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+            onSubmitEditing={Keyboard.dismiss}
+            value= {this.state.passwordConfirm}
+            onChangeText= {(text) => { this.setState({passwordConfirm: text}) }}
+            />
+          </View>
+
+          <TouchableOpacity onPress={this.onSignupPress}>
+            <LinearGradient style={s.button} colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]}>
+              <Text style={s.buttonText}>Sign Up</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <View style={{flexDirection:"row"}}>
+            <Text style={s.textNormal}>Already have an account?</Text>
+            <TouchableOpacity onPress={this.goToLogin}><Text style={s.textDark}> Log in</Text></TouchableOpacity>
+          </View>
+
         </View>
-
-        <View>
-          <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
-          <TextInput placeholder='Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-          
-          value= {this.state.password}
-          onChangeText= {(text) => { this.setState({password: text}) }}
-          />
-        </View>
-
-        <View>
-          <Image source={require('../assets/images/iconLock.jpg')} resizeMode='contain' style={s.icon}/>
-          <TextInput placeholder='Confirm Password' secureTextEntry={true} placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
-          onSubmitEditing={Keyboard.dismiss}
-          value= {this.state.passwordConfirm}
-          onChangeText= {(text) => { this.setState({passwordConfirm: text}) }}
-          />
-        </View>
-
-        <TouchableOpacity onPress={this.onSignupPress}>
-          <LinearGradient style={s.button} colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]}>
-            <Text style={s.buttonText}>Sign Up</Text>
-          </LinearGradient>
-        </TouchableOpacity>
-
-        <View style={{flexDirection:"row"}}>
-          <Text style={s.textNormal}>Already have an account?</Text>
-          <TouchableOpacity onPress={this.goToLogin}><Text style={s.textDark}> Log in</Text></TouchableOpacity>
-        </View>
-
+      
       </View>
-    
-    </View>
 
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
     )
   }
 }
