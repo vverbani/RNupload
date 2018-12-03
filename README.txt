@@ -1,4 +1,4 @@
-#ReceiptUpload
+ReceiptUpload
 
 #Last working dependencies:
 "dependencies": {
@@ -14,18 +14,27 @@
 #Get it to work
 1)npm install
 2)npm start (gitbash)
+<<<<<<< HEAD
 	expo start (windows cmd)
+=======
+    expo start (windows cmd)
+>>>>>>> cb96d53318ce8b074afd3c4d7f03d6890574925c
 3)open expo app on phone
 
 #Possible build errors
-1)Make sure correct npm: npm install npm@latest -g
+1)Make sure correct npm: 
+    npm install npm@latest -g
 2)npm install -g expo-cli
 
 -----------------------------------------
 #Upload descriptions [under dotted lines]
 #Format: 
+<<<<<<< HEAD
 	[date]: 
 		fixes/issues
+=======
+    [date]: fixes/issues {Trello task}
+>>>>>>> cb96d53318ce8b074afd3c4d7f03d6890574925c
 -----------------------------------------
 
 [2018-Dec-02]:
