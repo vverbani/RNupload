@@ -11,16 +11,17 @@
 #Get it to work
 1)npm install
 2)npm start (gitbash)
-b)expo start (windows cmd)
+    expo start (windows cmd)
 3)open expo app on phone
 
 #Possible build errors
-1)Make sure correct npm: npm install npm@latest -g
+1)Make sure correct npm: 
+    npm install npm@latest -g
 2)npm install -g expo-cli
 
 -----------------------------------------
 #Upload descriptions [under dotted lines]
 #Format: 
-[date]: fixes/issues
+    [date]: fixes/issues {Trello task}
 -----------------------------------------
 
