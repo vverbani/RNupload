@@ -11,7 +11,7 @@ export default class ViewTab extends Component{
 render(){
     return (
       <View style={styles.container}>
-        <Text style= {styles.navbarTitle}>View.Tab</Text>
+        <Text style= {styles.navbarTitle}>View</Text>
       </View>
     );
   }

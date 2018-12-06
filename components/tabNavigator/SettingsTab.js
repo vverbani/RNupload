@@ -12,7 +12,7 @@ export default class SettingsTab extends Component{
 render(){
     return (
       <View style={styles.container}>
-        <Text style= {styles.navbarTitle}>Settings.Tab</Text>
+        <Text style= {styles.navbarTitle}>Settings</Text>
 
       </View>
     );

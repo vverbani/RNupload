@@ -1,16 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //fire base + key authentication values
+import * as Expo from 'expo';
 import * as firebase from 'firebase';
 import ApiKeys from './constants/ApiKeys';
 
 //Auth Screens
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
-import DashBoardScreen from './screens/DashBoardScreen';
 import ResetPasswordScreen from './screens/ResetPasswordScreen';
 import RegisterScreen from './screens/RegisterScreen';
 
@@ -40,43 +40,70 @@ export default class App extends React.Component {
 
   render() {
     return (
+      <SafeAreaView style = {{ flex: 1, backgroundColor: '#f2f2f2'}}>
        <MainNavigator />
+      </SafeAreaView>
     );
   }
 }
 
 //Tab navigation for when user is logged in 
-const AppTabNavigator = createBottomTabNavigator ({
-  UploadTab: {
+const AppTabNavigator = createMaterialTopTabNavigator({
+  Upload: {
     screen: UploadTab,
       defaultNavigationOptions:{
-        tabBarLabel: 'Upload',
+        title: 'Upload',
         tabBarIcon: ({tintColor}) => (
-          <Icon name= "ios-qr-scanner" color= {tintColor} size={26}/>
+          <Icon name= "ios-add-circle-outline" size={24}/>
         )
       }
   },
-  ViewTab: {
+  View: {
     screen: ViewTab,
     defaultNavigationOptions:{
-        tabBarLabel: 'View',
+        title: 'View',
         tabBarIcon: ({tintColor}) => (
-          <Icon name= "ios-search" color= {tintColor} size={26}/>
+          <Icon 
+          name= "ios-search" 
+          color= {tintColor}
+          size={24}/>
         )
       }
   },
-  SettingsTab: {
+  Settings: {
     screen: SettingsTab,
     deaultNavigationOptions:{
-        tabBarLabel: 'Settings',
+        title: 'Settings',
         tabBarIcon: ({tintColor}) => (
-          <Icon name= "ios-settings" color= {tintColor} size={26}/>
+          <Icon name= "ios-reorder" color= {tintColor} size={24}/>
         )
       }
   }}, 
   {
-    initialRouteName: 'ViewTab',
-    order: ['UploadTab','ViewTab', 'SettingsTab'],
+    initialRouteName: 'View',
+    order: ['Upload','View', 'Settings'],
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      showIcon: true,
+      iconStyle:{
+        size: 24,
+        color: 'black',
+        width: 100,
+      },
+      showLabel: true,
+      activeTintColor: '#000',
+      inactiveTintColor: '#d1cece',
+      style: {
+        backgroundColor: '#f2f2f2'
+      },
+      indicatorStyle: {
+        height: 0
+      },  
+      activeTintColor: 'black',
+      labelStyle:{
+        fontSize: 14,
+      }
+    }
 });
 
 //Navigation for authenticating user
@@ -98,9 +125,6 @@ const AppNavigator =  createStackNavigator ({
     navigationOptions: { 
       header: null 
     }
-  },
-  DashBoardScreen: { 
-    screen: DashBoardScreen
   },
   ResetPasswordScreen: { screen: ResetPasswordScreen },
 })

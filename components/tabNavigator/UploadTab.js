@@ -11,7 +11,7 @@ export default class UploadTab extends Component{
 render(){
     return (
       <View style={styles.container}>
-        <Text style= {styles.navbarTitle}>Upload.Tab</Text>
+        <Text style= {styles.navbarTitle}>Upload</Text>
       </View>
     );
   }

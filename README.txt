@@ -1,6 +1,6 @@
 ReceiptUpload
 
-#Up-to-date dependencies [2018-Dec-02]:
+#Up-to-date dependencies [2018-Dec-06]:
 "dependencies": {
     "expo": "^31.0.2",
     "firebase": "^5.5.8",
@@ -8,8 +8,10 @@ ReceiptUpload
     "native-base": "^2.8.1",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
-    "react-navigation": "^2.18.2"
-   }
+    "react-native-paper": "^2.2.8",
+    "react-navigation": "^3.0.5",
+    "react-navigation-material-bottom-tabs": "^1.0.0"
+  }
 
 #Get it to work
 1)npm install
@@ -33,11 +35,14 @@ ReceiptUpload
 		fixes/issues
     [date]: fixes/issues {Trello task}
 -----------------------------------------
+
 [2018-Dec-05]
     Fixed caching error (view step 3 on error debugging)
     Updated React Navigation to V3
-    Updated expo
+    Updated Expo ^31
     Fixed tabs for Dashboard
+    Enabled swipe between tabs
+    Using MaterialTopTabNavigator (bottom position)
     
 [2018-Dec-03]:
     Deleted DashboardScreen
