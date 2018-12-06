@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
 import * as firebase from 'firebase';
 import { LinearGradient} from 'expo';
+import { createBottomTabNavigator} from 'react-navigation';
 
+import UploadTab from '../components/tabNavigator/UploadTab';
+import SettingsTab from '../';
 var s = require('../components/style/style');
 
+// MIGHT NOT NEED THIS //
 export default class DashboardScreen extends React.Component {
   constructor(props) {
       super(props);
@@ -13,12 +17,19 @@ export default class DashboardScreen extends React.Component {
   render(){
     return(
       <View>
-          <Text>Dashboard</Text>
+          <AppTabNavigator />
       </View>
         
     );
   }
 }
+
+const AppTabNavigator = createBottomTabNavigator ({
+  UploadTab: {
+    screen: UploadTab
+  },
+
+});
 
 const styles = StyleSheet.create({
   formContainer:{

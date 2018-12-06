@@ -31,6 +31,7 @@ export default class RegisterScreen extends React.Component {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
     .then(() => { 
       this.props.navigation.navigate('DashBoardScreen'); 
+      //******************replace with new navigation *******************
       }, (error) => {
       Alert.alert(error.message);
     });

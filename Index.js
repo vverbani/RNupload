@@ -40,7 +40,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-       <MainNavigator />
+       <AppTabNavigator />
     );
   }
 }
@@ -106,5 +106,5 @@ const AppNavigator =  createStackNavigator ({
 })
 
 //React-Nav 3.0 Create App Container
-const MainNavigator = createAppContainer(AppTabNavigator);
+const App = createAppContainer(AppNavigator);
 
