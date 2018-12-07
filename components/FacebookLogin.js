@@ -36,8 +36,8 @@ export default class FacebookLogin extends Component {
 
   render(){
 		return (
-      <TouchableOpacity style={s.button} onPress={this.onFacebookLoginPress}>
-        <Text style={s.buttonTextGoogle}>Sign In With Facebook</Text>
+      <TouchableOpacity style={s.buttonFacebook} onPress={this.onFacebookLoginPress}>
+        <Text style={s.buttonTextFacebook}>Sign In With Facebook</Text>
       </TouchableOpacity>
     );
 	}

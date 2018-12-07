@@ -29,6 +29,11 @@ export default class LoginScreen extends Component {
   goToRegister = () => {
     this.props.navigation.navigate('RegisterScreen');
   }
+
+  goToResetPassword = () => {
+    this.props.navigation.navigate('ResetPasswordScreen');
+  }
+
   render(){
 		return (
       <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
@@ -56,6 +61,12 @@ export default class LoginScreen extends Component {
                   value= {this.state.password}
     		          onChangeText= {(text) => { this.setState({password: text}) }}
     		        />
+              </View>
+
+              <View style={{flexDirection:"row"}}>
+                <Text style={s.textNormal}>    Need to</Text>
+                <TouchableOpacity onPress={this.goToResetPassword}><Text style={s.textDark}> reset your password</Text></TouchableOpacity>
+                <Text style={s.textNormal}>?</Text>
               </View>
 
               <TouchableOpacity onPress={this.onLoginPress}>

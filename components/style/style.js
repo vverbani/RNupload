@@ -71,6 +71,17 @@ module.exports = StyleSheet.create({
     borderRadius:40,
     height:64,
   },
+   buttonFacebook:{
+    marginTop:25,
+    alignSelf: 'stretch',
+    padding: 13,
+    backgroundColor: '#3362aa',
+    borderWidth: 1,
+    borderColor: '#39a498',
+    alignItems: 'center',
+    borderRadius:40,
+    height:64,
+  },
   buttonText:{
     color:'#fff',
     fontSize:24,
@@ -79,7 +90,7 @@ module.exports = StyleSheet.create({
     color:'#39a498',
     fontSize:24,
   },
-  buttonTextGoogle:{
+  buttonTextFacebook:{
     color:'#FFF',
     fontSize:22,
   },

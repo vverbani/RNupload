@@ -1,6 +1,10 @@
-import React from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Button, Alert } from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import * as firebase from 'firebase';
+import { LinearGradient} from 'expo';
+import * as Expo from 'expo';
+
+var s = require('../components/style/style');
 
 export default class ResetPasswordScreen extends React.Component {
   constructor(props){
@@ -19,45 +23,46 @@ export default class ResetPasswordScreen extends React.Component {
         Alert.alert(error.message);
       }); 
   }
+
+  goToLogin = () => {
+    this.props.navigation.navigate('LoginScreen');
+  }
   render(){
     return (
-      <View style={styles.formContainer}>
-        <TextInput placeholder='email' style={styles.textInput} underlineColorAndroid={'transparent'}
-          value= {this.state.email}
-          onChangeText= {(text) => { this.setState({email: text}) }}
-        />
-        <Button title= "Reset Password" onPress={this.onResetPasswordPress} />
-      </View>
+      <TouchableWithoutFeedback onPress = {Keyboard.dismiss}>
+        <KeyboardAvoidingView behavior='padding' style={s.container}>
+
+        <LinearGradient colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]} style={s.topGradient}>
+          <Image source={require('../assets/images/logo.png')} style={s.logo}/>
+        </LinearGradient>
+        
+        <View style={s.contentBackground}>
+
+          <View style={s.formContainer}>
+
+          <View>
+            <Image source={require('../assets/images/iconEmail.jpg')} resizeMode='contain' style={s.icon}/>
+            <TextInput placeholder='email' placeholderTextColor={'#98d4cd'} style={s.textInput} underlineColorAndroid={'transparent'}
+              value= {this.state.email}
+              onChangeText= {(text) => { this.setState({email: text}) }}
+            />
+          </View>
+
+          <TouchableOpacity onPress={this.onResetPasswordPress}>
+            <LinearGradient style={s.button} colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]}>
+              <Text style={s.buttonText}>Reset Password</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+
+          <View style={{flexDirection:"row"}}>
+            <Text style={s.textNormal}>Already have an account?</Text>
+            <TouchableOpacity onPress={this.goToLogin}><Text style={s.textDark}> Log in</Text></TouchableOpacity>
+          </View>
+
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  formContainer:{
-    alignSelf: 'stretch',
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  textInput:{
-    fontSize:20,
-    marginTop:30,
-    alignSelf: 'stretch',
-    padding: 16,
-    backgroundColor: '#FFF',
-    borderWidth: 1,
-    borderColor: '#294294',
-  },
-  button:{
-    marginTop:30,
-    alignSelf: 'stretch',
-    padding: 22,
-    backgroundColor: '#294294',
-    borderWidth: 1,
-    borderColor: '#000',
-    alignItems: 'center',
-  },
-  buttonText:{
-    color:'#FFF',
-    fontSize:22,
-  }
-});

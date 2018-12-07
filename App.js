@@ -126,9 +126,14 @@ const AppNavigator =  createStackNavigator ({
       header: null 
     }
   },
-  ResetPasswordScreen: { screen: ResetPasswordScreen },
+  ResetPasswordScreen: { 
+    screen: ResetPasswordScreen,
+    navigationOptions: { 
+      header: null 
+    }
+  },
 })
 
 //React-Nav 3.0 Create App Container
-const MainNavigator = createAppContainer(AppTabNavigator);
+const MainNavigator = createAppContainer(AppNavigator);
 
