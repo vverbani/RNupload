@@ -35,6 +35,10 @@ ReceiptUpload
 		fixes/issues
     [date]: fixes/issues {Trello task}
 -----------------------------------------
+[2018-Dec-06]
+    Added GoogleLogin page
+    Added GoogleLogin button to RegisterScreen
+    Added receipt/search/settings/uploading.png
 
 [2018-Dec-05]
     Fixed caching error (view step 3 on error debugging)
