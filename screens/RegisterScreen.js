@@ -1,11 +1,9 @@
 import React from 'react';
 import { TouchableWithoutFeedback,Keyboard,View, Image, Alert, Text, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import * as firebase from 'firebase';
-import { LinearGradient } from 'expo';
- 
-//import social media log in
+import {LinearGradient} from 'expo';
+
 import FacebookLogin from '../components/FacebookLogin';
-import GoogleLogin from '../components/GoogleLogin';
 
 var s = require('../components/style/style');
 
@@ -89,7 +87,6 @@ export default class RegisterScreen extends React.Component {
           </TouchableOpacity>
 
           <FacebookLogin />
-          <GoogleLogin />
 
           <View style={{flexDirection:"row"}}>
             <Text style={s.textNormal}>Already have an account?</Text>

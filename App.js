@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import { createStackNavigator, createAppContainer, createMaterialTopTabNavigator } from 'react-navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 //fire base + key authentication values
 import * as Expo from 'expo';
@@ -53,25 +53,30 @@ const AppTabNavigator = createMaterialTopTabNavigator({
     screen: UploadTab,
       defaultNavigationOptions:{
         title: 'Upload',
-        tabBarIcon: ({focused}) =>
-        <Ionicons name={focused ? "ios-settings" : 'ios-settings-outline'} size={24} />,
+        tabBarIcon: ({tintColor}) => (
+          <Icon name= "ios-add-circle-outline" size={24}/>
+        )
       }
   },
   View: {
     screen: ViewTab,
     defaultNavigationOptions:{
         title: 'View',
-        tabBarIcon:
-          <Ionicons
+        tabBarIcon: ({tintColor}) => (
+          <Icon 
           name= "ios-search" 
+          color= {tintColor}
           size={24}/>
+        )
       }
   },
   Settings: {
     screen: SettingsTab,
     deaultNavigationOptions:{
         title: 'Settings',
-        tabBarIcon: <Ionicons name="ios-checkmark-circle"  size={24} />    
+        tabBarIcon: ({tintColor}) => (
+          <Icon name= "ios-reorder" color= {tintColor} size={24}/>
+        )
       }
   }}, 
   {
@@ -80,7 +85,6 @@ const AppTabNavigator = createMaterialTopTabNavigator({
     tabBarPosition: 'bottom',
     tabBarOptions: {
       showIcon: true,
-      adaptive: false,
       iconStyle:{
         size: 24,
         color: 'black',
