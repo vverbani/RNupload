@@ -3,6 +3,7 @@ import {View, Image, Alert, Text, Button, TextInput, TouchableOpacity, KeyboardA
 import * as firebase from 'firebase';
 import { LinearGradient} from 'expo';
 import * as Expo from 'expo';
+import { NavigationActions } from 'react-navigation'; 
 
 import FacebookLogin from '../components/FacebookLogin';
 var s = require('../components/style/style');
@@ -17,17 +18,20 @@ export default class LoginScreen extends Component {
 	  }
     //registering with email
   	onLoginPress = () => {
+      if(this.state.email.length < 1){
+        Alert.alert("Please enter your credentials."); 
+        return;
+      }
     	firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
     	.then(() => { 
-        //*************Replace this with new dashboard navigation
-      this.props.navigation.navigate('DashBoardScreen');
+        this.props.navigation.navigate('AppTabNavigator');
     }, (error) => {
       Alert.alert(error);
     })
   }
 
   goToRegister = () => {
-    this.props.navigation.navigate('RegisterScreen');
+    this.props.navigation.navigate('Register');
   }
 
   goToResetPassword = () => {
@@ -63,12 +67,6 @@ export default class LoginScreen extends Component {
     		        />
               </View>
 
-              <View style={{flexDirection:"row"}}>
-                <Text style={s.textNormal}>    Need to</Text>
-                <TouchableOpacity onPress={this.goToResetPassword}><Text style={s.textDark}> reset your password</Text></TouchableOpacity>
-                <Text style={s.textNormal}>?</Text>
-              </View>
-
               <TouchableOpacity onPress={this.onLoginPress}>
                 <LinearGradient style={s.button} colors={['#7321bf','#24a486']} start={[0,1]} end={[1,0]}>
                   <Text style={s.buttonText}>Sign In</Text>
@@ -83,6 +81,13 @@ export default class LoginScreen extends Component {
                   <Text style={s.textDark}> Register</Text>
                 </TouchableOpacity>
               </View>
+
+               <View style={{flexDirection:"row"}}>
+                <Text style={s.textNormal}>    Need to</Text>
+                <TouchableOpacity onPress={this.goToResetPassword}><Text style={s.textDark}> reset your password</Text></TouchableOpacity>
+                <Text style={s.textNormal}>?</Text>
+              </View>
+
             </View>
           </View>
       </KeyboardAvoidingView>

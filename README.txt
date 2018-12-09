@@ -27,6 +27,8 @@ ReceiptUpload
     a)delete metro-cache from %TEMP%
     b)expo start --clear
     c)npm start -- --reset-cache
+4)Delete 'node_modules'
+    b)npm install
 
 -----------------------------------------
 #Upload descriptions [under dotted lines]
@@ -35,7 +37,10 @@ ReceiptUpload
 		fixes/issues
     [date]: fixes/issues {Trello task}
 -----------------------------------------
-
+[2018-Dec-07]
+    Updated Dependencies
+    Fixed navigation bug (user is directed to dashboard once signedin)
+    
 [2018-Dec-05]
     Fixed caching error (view step 3 on error debugging)
     Updated React Navigation to V3
