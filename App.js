@@ -19,6 +19,9 @@ import UploadTab from './components/tabNavigator/UploadTab';
 import SettingsTab from './components/tabNavigator/SettingsTab';
 import ViewTab from './components/tabNavigator/ViewTab';
 
+//Social Media Screens
+import FacebookLogin from './components/FacebookLogin';
+
 export default class App extends React.Component {
  constructor(props) {
     super(props);
@@ -79,16 +82,18 @@ const AppNavigator =  createStackNavigator ({
       Upload: {
       screen: UploadTab,
         defaultNavigationOptions:{
-          title: 'Upload',
+          tabBarLabel: 'Upload',
           tabBarIcon: ({tintColor}) => (
-            <Icon name= "ios-add-circle-outline" size={24}/>
+            <View>
+              <Icon name= "ios-add-circle-outline" color= {tintColor} size={24}/>
+            </View>
           )
         }
       },
       View: {
         screen: ViewTab,
         defaultNavigationOptions:{
-            title: 'View',
+            tabBarLabel: 'View',
             tabBarIcon: ({tintColor}) => (
               <Icon 
               name= "ios-search" 
@@ -100,35 +105,33 @@ const AppNavigator =  createStackNavigator ({
       Settings: {
         screen: SettingsTab,
         deaultNavigationOptions:{
-            title: 'Settings',
+            tabBarLabel: 'Settings',
             tabBarIcon: ({tintColor}) => (
               <Icon name= "ios-reorder" color= {tintColor} size={24}/>
             )
           }
       }}, 
   {
+    lazyLoad: true,
+    animationEnabled: false,
     initialRouteName: 'View',
-    order: ['Upload','View', 'Settings'],
     tabBarPosition: 'bottom',
     tabBarOptions: {
       showIcon: true,
-      iconStyle:{
-        size: 24,
-        color: 'black',
-        width: 100,
+      activeTintColor: 'black', 
+      inactiveTintColor: '#d1cece',
+      iconStyle: {
+        color: 'black'
       },
       showLabel: true,
-      activeTintColor: '#000',
-      inactiveTintColor: '#d1cece',
       style: {
         backgroundColor: '#f2f2f2'
       },
       indicatorStyle: {
         height: 0
-      },  
-      activeTintColor: 'black',
+      }, 
       labelStyle:{
-        fontSize: 14,
+        fontSize: 8,
       }
     }
     })

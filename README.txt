@@ -22,7 +22,8 @@ ReceiptUpload
 #Possible build errors
 1)Make sure correct npm: 
     npm install npm@latest -g
-2)npm install -g expo-cli
+2)npm install -g expo-cli 
+    b)npm install expo-cli
 3)When upgrading dependencies (navigation)
     a)delete metro-cache from %TEMP%
     b)expo start --clear
@@ -37,6 +38,9 @@ ReceiptUpload
 		fixes/issues
     [date]: fixes/issues {Trello task}
 -----------------------------------------
+[2018-Dec-19]
+    Added upload picture from photo gallery
+    
 [2018-Dec-07]
     Updated Dependencies
     Fixed navigation bug (user is directed to dashboard once signedin)

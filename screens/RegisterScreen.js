@@ -20,6 +20,10 @@ export default class RegisterScreen extends React.Component {
   }
 
   onSignupPress = () => {
+    if(this.state.email.length < 1){
+        Alert.alert("Please enter your credentials."); 
+        return;
+      }
     if(this.state.password.length < 9){
       Alert.alert("Password needs to be atleast 8 characters long"); 
       return;
@@ -29,8 +33,12 @@ export default class RegisterScreen extends React.Component {
       return;
     } 
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-    .then(() => { 
-      this.props.navigation.navigate('AppTabNavigator');
+      .then(() => { 
+       // firebase.auth().currentUser.sendEmailVerification().then(function (){
+          //email sent
+      //  }, function (error){
+       // });
+        this.props.navigation.navigate('AppTabNavigator');
       }, (error) => {
       Alert.alert(error.message);
     });

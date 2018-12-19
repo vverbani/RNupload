@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Text, TouchableOpacity } from 'react-native';
+
+import { NavigationActions } from 'react-navigation';
 import * as firebase from 'firebase';
 import * as Expo from 'expo';
 
@@ -22,10 +24,11 @@ export default class FacebookLogin extends Component {
         //retrieve fb information
         const credential = firebase.auth.FacebookAuthProvider.credential(token);
         //create+store database
-        //*******add navigation**********************
+        
         firebase.auth().signInAndRetrieveDataWithCredential(credential).catch((error) => {
         Alert.alert(error);
         })
+        this.navigation.navigate('AppTabNavigator');
       } else {
       }
     } catch ({ message }) {

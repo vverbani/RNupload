@@ -31,12 +31,13 @@ export default class LoginScreen extends Component {
   }
 
   goToRegister = () => {
-    this.props.navigation.navigate('Register');
+    this.props.navigation.navigate('AppTabNavigator');
   }
 
   goToResetPassword = () => {
     this.props.navigation.navigate('ResetPasswordScreen');
   }
+
 
   render(){
 		return (
