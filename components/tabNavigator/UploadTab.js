@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Image, Text, View, StyleSheet, ListView, TouchableHighlight, Button, Alert } from 'react-native';
 import { ImagePicker, Permissions } from 'expo';
+//import ImageResizer from 'react-native-image-resizer';
 import * as firebase from 'firebase';
 
 
@@ -16,8 +17,6 @@ selectPicture= async () => {
     aspect: 1,
     allowsEditing: true,
   });
-    console.log(uri);
-
     this.setState({ image: uri });
     if(!cancelled){
       this.uploadImage(uri, "test-image")
@@ -38,17 +37,37 @@ takePicture = async () => {
   const { cancelled, uri }= await ImagePicker.launchCameraAsync({
     allowsEditing: true,
   });
+
+   console.log(uri);
+    this.setState({ image: uri });
+    if(!cancelled){
+      this.uploadImage(uri, "test-image25")
+      .then(() => {
+        console.log("image was uploaded successfully.");
+      })
+      .catch((error) => {
+        Alert.alert(error);
+      })
+    }else{
+      console.log("Was cancelled");
+    }
   
 }
-
-//store to storage
+//upload image to storage
 uploadImage= async (uri, imageName) => {
+  //year and month 
+  var date= new Date().getDate();
+  var month= new Date().getMonth() + 1;
+  var year= new Date().getFullYear();
+  //generate random number 
+  var min = 1;
+  var max = 999999;
+  var random = year + "-"+ month + "-" + date +"-" + min + Math.floor(Math.random() *(max-min));
+
   try {
     const response= await fetch(uri); 
     const blob= await response.blob();
-    //store as images/user/year/month/Date[random 4 letter string]imagename
-    //2018-12-181as2valsImage    ((example))
-    var ref= firebase.storage().ref().child("images/" + imageName); 
+    var ref= firebase.storage().ref().child("images/" + year+ "/" + month + "/" + random); 
     return ref.put(blob);
   }catch(error){
     Alert.alert("Your receipt couldn't be uploaded at this time. We apologize for the inconvenience.")

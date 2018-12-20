@@ -38,9 +38,13 @@ ReceiptUpload
 		fixes/issues
     [date]: fixes/issues {Trello task}
 -----------------------------------------
+
 [2018-Dec-19]
     Added upload picture from photo gallery
-    
+    Added snap picture
+    Created naming convention for image storage
+        ->images/year/month/[year][month][random number 1 - 99999]  
+          
 [2018-Dec-07]
     Updated Dependencies
     Fixed navigation bug (user is directed to dashboard once signedin)
